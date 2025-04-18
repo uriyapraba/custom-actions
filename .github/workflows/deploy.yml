@@ -10,7 +10,9 @@ jobs:
       - name: Get code
         uses: actions/checkout@v4
       - name: customized action for cache depenency
-        uses: ./.github/actions/cached-action/ 
+        uses: ./.github/actions/cached-action/
+        with:
+          cache: 'false'
       - name: Lint code
         run: npm run lint
   test:
