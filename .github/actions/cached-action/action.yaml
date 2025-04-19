@@ -9,7 +9,7 @@ outputs:
   cache-output:
     description: 'Whether cache is used.'
     # required: 'false'
-    value: ${{ steps.cache-output.outputs.cache}}
+    value: ${{ steps.install.outputs.cache}}
 
 runs:
   using: 'composite'       # other two types of actions 'javascipt' and 'docker'
@@ -22,10 +22,10 @@ runs:
         path: node_modules
         key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
     - name: Install dependencies
-      id: cache-output
+      id: install
       if: steps.cache.outputs.cache-hit != 'true' || inputs.cache != 'true'
       run: | 
         npm ci
         # echo " cache='${{ inputs.cache}} >> GITHUB_OUTPUT'"
-        echo "::set-output name=cache '${{inputs.cache}}'"
+        echo "::set-output name=cache:: '${{inputs.cache}}'"
       shell: bash
