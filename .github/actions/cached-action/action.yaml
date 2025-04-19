@@ -8,7 +8,7 @@ inputs:
 outputs:
   cache-output:
     description: 'Whether cache is used.'
-    required: 'false'
+    # required: 'false'
     value: ${{ steps.cache-output.outputs.cache}}
 
 runs:
